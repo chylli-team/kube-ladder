@@ -834,7 +834,7 @@ $ kubectl get pods -n tutorial
 NAME                     READY   STATUS    RESTARTS   AGE
 nginx-646b46d648-hbwg2   1/1     Running   0          26m
 
-$ kubectl label pod nginx-646b46d648-hbwg2 app=v1 -n tutorial
+$ kubectl label pod nginx-646b46d648-hbwg2 version=v1 -n tutorial
 pod/nginx-646b46d648-hbwg2 labeled
 
 $ kubectl describe pods nginx-646b46d648-hbwg2 -n tutorial
@@ -845,7 +845,7 @@ Node:           minikube/10.0.2.15
 Start Time:     Fri, 28 Jun 2019 14:56:59 +0800
 Labels:         app=v1
                 pod-template-hash=646b46d648
-                app=nginx
+                version=nginx
 Annotations:    <none>
 Status:         Running
 IP:             172.17.0.11
@@ -853,7 +853,7 @@ Controlled By:  ReplicaSet/nginx-646b46d648
 ```
 
 注意这里我们是对 Pod 添加了一个 label，并不会影响 Deployment 与 Pod 之间的关系。因为 Pod 保持 Label
-`run=nginx`，依然会被 Deployment 选中。
+`app=nginx`，依然会被 Deployment 选中。
 
 ## Readings
 
