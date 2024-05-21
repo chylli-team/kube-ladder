@@ -970,7 +970,7 @@ nginx-d6b94d6f6-rh42k   1/1     Running   0          4m27s
 接下来，我们通过命令行了解 kubernetes 更新应用的过程。
 
 ```
-$ kubectl set image deployments nginx nginx=cargo.caicloud.io/caicloud/nginx:1.9.3 -n tutorial
+$ kubectl set image deployments nginx nginx=nginx:1.26.0 -n tutorial
 deployment.extensions/nginx image updated
 
 $ kubectl get pods -n tutorial
@@ -991,7 +991,7 @@ nginx-86d4667764-hr6r7   1/1     Running   0          65s
 ```
 
 分析一下上述命令，`kubectl set image` 将 Deployment 中的 nginx 镜像版本改为 1.9.3；运行该命令之后，发现
-kubernetes 删掉了一个现有的 Pod，然后重新启动了两个新的 Pod（我们可以从一串数字中看出，"86d4667764" 是新 Pod 的 Hash 值，"d6b94d6f6" 是老 Pod 的 Hash 值）。等待一段时间后再次查询 Pods，发现所有新的 Pods 已经上线。整个过程中，我们都可以尝试去访问 nginx 服务，注意其版本的变化。
+kubernetes 删掉了一个现有的 Pod，然后重新启动了两个新的 Pod（我们可以从一串数字中看出，"86d4667764" 是新 Pod 的 Hash 值，"d6b94d6f6" 是老 Pod 的 Hash 值）。等待一段时间后再次查询 Pods，发现所有新的 Pods 已经上线。整个过程中，我们都可以尝试去访问 nginx 服务，注意其版本的变化(如果你用的是macos,注意创建tunnel)。
 
 ```
 $ curl $(minikube ip):31658/version
