@@ -777,9 +777,9 @@ $ kubectl describe deployment nginx -n tutorial
 Name:                   nginx
 Namespace:              tutorial
 CreationTimestamp:      Fri, 28 Jun 2019 14:56:58 +0800
-Labels:                 run=nginx
+Labels:                 app=nginx
 Annotations:            deployment.kubernetes.io/revision: 1
-Selector:               run=nginx
+Selector:               app=nginx
 ...
 ```
 
@@ -787,9 +787,9 @@ Selector:               run=nginx
 $ kubectl describe svc nginx -n tutorial
 Name:                   nginx
 Namespace:              tutorial
-Labels:                 run=nginx
+Labels:                 app=nginx
 Annotations:            <none>
-Selector:               run=nginx
+Selector:               app=nginx
 ...
 ```
 
@@ -801,7 +801,7 @@ Priority:       0
 Node:           minikube/10.0.2.15
 Start Time:     Fri, 28 Jun 2019 14:56:59 +0800
 Labels:         pod-template-hash=646b46d648
-                run=nginx
+                app=nginx
 ```
 
 ## Label operations
@@ -809,13 +809,13 @@ Labels:         pod-template-hash=646b46d648
 kubectl 支持对资源的 label 进行管理，比如我们可以通过 -l 选项查看仅具有某个 label 的资源。
 
 ```
-$ kubectl get pods -l run=nginx -n tutorial
+$ kubectl get pods -l app=nginx -n tutorial
 NAME                     READY   STATUS    RESTARTS   AGE
 nginx-646b46d648-hbwg2   1/1     Running   0          26m
 ```
 
 ```
-$ kubectl get svc -l run=nginx -n tutorial
+$ kubectl get svc -l app=nginx -n tutorial
 NAME    TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
 nginx   NodePort   10.107.97.57   <none>        80:32542/TCP   7m38s
 ```
@@ -823,7 +823,7 @@ nginx   NodePort   10.107.97.57   <none>        80:32542/TCP   7m38s
 当没有任何资源满足 label 时，输出为空：
 
 ```
-$ kubectl get svc -l run=apache -n tutorial
+$ kubectl get svc -l app=apache -n tutorial
 No resources found.
 ```
 
@@ -845,7 +845,7 @@ Node:           minikube/10.0.2.15
 Start Time:     Fri, 28 Jun 2019 14:56:59 +0800
 Labels:         app=v1
                 pod-template-hash=646b46d648
-                run=nginx
+                app=nginx
 Annotations:    <none>
 Status:         Running
 IP:             172.17.0.11
