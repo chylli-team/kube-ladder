@@ -712,10 +712,26 @@ External Traffic Policy:  Cluster
 Events:                   <none>
 ```
 
-从以上输出可以看到，nginx 服务打开了节点的 32542 端口（每个节点），我们可以通过 `NodeIP:NodePort` 访问服务。
+从以上输出可以看到，nginx 服务打开了节点的 32542 端口（每个节点），我们可以通过 `NodeIP:NodePort` 访问服务。(注意 macos不行）
 
 ```
 $ curl $(minikube ip):32542
+<!DOCTYPE html>
+<html>
+...
+</html>
+```
+
+在macos上,由于docker drive的限制，需要打开一个通道:
+
+```
+minikube service hello-minikube1 --url
+http://127.0.0.1:49786
+❗  Because you are using a Docker driver on darwin, the terminal needs to be open to run it.
+```
+
+```
+❯ curl http://127.0.0.1:49786
 <!DOCTYPE html>
 <html>
 ...
@@ -727,6 +743,7 @@ $ curl $(minikube ip):32542
 * [kubernetes service](https://kubernetes.io/docs/concepts/services-networking/service/). Please read as much as you can, we'll come back to service again.
 * [run application with service](https://kubernetes.io/docs/tasks/access-application-cluster/connecting-frontend-backend/).
 * [ports in kubernetes](https://speakerdeck.com/thockin/kubernetes-a-very-brief-explanation-of-ports)
+* [NodePort access in minikube on macos](https://minikube.sigs.k8s.io/docs/handbook/accessing/#using-minikube-service-with-tunnel)
 
 # Kubernetes Label
 
