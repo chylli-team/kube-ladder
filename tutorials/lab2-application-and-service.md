@@ -1182,7 +1182,7 @@ nginx-646b46d648-9wpdp   1/1     Running   0          9m
 创建应用之后，我们可以使用 kubectl 更新 yaml 文件并将更新返回给 kubernetes。
 
 ```
-# Change image from 1.9.3 to 1.9.7
+# Change image from 1.26.0 to 1.25.5
 $ vim resources/pod.yaml
 
 $ kubectl apply -f resources/pod.yaml -n tutorial
