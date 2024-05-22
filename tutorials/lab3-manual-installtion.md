@@ -97,7 +97,7 @@
 - 确保 VM 间网络并关闭了防火墙
 - 确保 VM 间可以通过 hostname 互相访问，即，假如，VM1 的 hostname 是 master，VM2 的 hostname 是 worker-1，那么 VM1 需要能够成功执行 `ping worker-1`。（或许你需要修改 hostname & `/etc/hosts`）
 
-**并在准备好的所有节点上，执行以下操作：**
+**并在准备好的所有节点上，执行以下操作：(debian上不用)**
 
 如果各个主机启用了防火墙，需要开放 k8s 各个组件所需要的端口，可以查看 [Installing kubeadm - Check required ports](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#check-required-ports)。
 这里简单起见直接禁用防火墙：
@@ -146,11 +146,11 @@ cfssl 和 cfssljson 命令行工具用于提供 PKI Infrastructure 基础设施�
 ```bash
 # 或许你需要先执行 `yum install -y wget` 以安装 wget
 wget --timestamping \
-  https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 \
-  https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64
-chmod +x cfssl_linux-amd64 cfssljson_linux-amd64
-sudo mv cfssl_linux-amd64 /usr/local/bin/cfssl
-sudo mv cfssljson_linux-amd64 /usr/local/bin/cfssljson
+  https://github.com/cloudflare/cfssl/releases/download/v1.6.5/cfssl_1.6.5_linux_amd64 \
+  https://github.com/cloudflare/cfssl/releases/download/v1.6.5/cfssljson_1.6.5_linux_amd64
+chmod a+x cfssl_1.6.5_linux_amd64 cfssljson_1.6.5_linux_amd64
+sudo mv cfssl_1.6.5_linux_amd64 /usr/local/bin/cfssl
+sudo mv cfssljson_1.6.5_linux_amd64 /usr/local/bin/cfssljson
 ```
 
 #### 验证
@@ -173,7 +173,7 @@ kubectl 命令行工具用来与 Kubernetes API Server 交互，可以在 Kubern
 #### Linux
 
 ```bash
-wget https://storage.googleapis.com/kubernetes-release/release/v1.15.0/bin/linux/amd64/kubectl
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 chmod +x kubectl
 sudo mv kubectl /usr/local/bin/
 ```
